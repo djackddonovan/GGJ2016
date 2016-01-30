@@ -6,30 +6,36 @@ Direct3D:
     Vendor:   Intel
     VRAM:     128 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.041 seconds
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Documents\Unity Projects\Poltergeist\PROTO\Poltergeist_Data\Managed\System.dll (this message is harmless)
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.042 seconds
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.716404 ms
+UnloadTime: 6.340487 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3310 -> priority: 1 
-  Thread -> id: 205c -> priority: 1 
+  Thread -> id: 38b0 -> priority: 1 
+  Thread -> id: 38b4 -> priority: 1 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 5.732877 ms
+UnloadTime: 6.105243 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 363.
-Total: 0.265623 ms (FindLiveObjects: 0.037770 ms CreateObjectMapping: 0.013958 ms MarkObjects: 0.208557 ms  DeleteObjects: 0.003694 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 375.
+Total: 0.337059 ms (FindLiveObjects: 0.033254 ms CreateObjectMapping: 0.014779 ms MarkObjects: 0.281635 ms  DeleteObjects: 0.004105 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 37.728855 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 312.
+Total: 0.984081 ms (FindLiveObjects: 0.053371 ms CreateObjectMapping: 0.044749 ms MarkObjects: 0.640453 ms  DeleteObjects: 0.243864 ms)
 

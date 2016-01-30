@@ -12,21 +12,6 @@ public class Character : MonoBehaviour {
 	}
 
 	[Serializable]
-	class slotStatus {
-		public string slot = "";
-		public string item = "";
-	}
-
-	[Serializable]
-	class animInfos {
-		public string animPlayed = "None";
-		public List<slotStatus> slotConditions = new List<slotStatus> ();
-
-		public float addedMadness = 0f;
-		public float addedMadnessCap = 0f;
-	}
-
-	[Serializable]
 	class CharacterAction {
 		public string actionName = "";
 
@@ -34,8 +19,9 @@ public class Character : MonoBehaviour {
 		public float endTime = 1f;
 		public int node = 0;
 
-		public string defaultAnim = "None";
-		public List<animInfos> anims = new List<animInfos> ();
+		public string itemSlot = "None";
+		public bool takeItemInHolder = true;
+		public string animPlayed = "None";
 	}
 
 	public RailPath path;
@@ -55,16 +41,33 @@ public class Character : MonoBehaviour {
 	int currentActionIndice; //also design the next action to perform is none is currently being done
 	bool actionStarted;
 
-	float madnessStatus = 0f;
+	float madness = 0f;
+
+	SlotRecord slotRecord;
+
+	[SerializeField]
+	Transform itemHolder;
+
+	[SerializeField, Tooltip("0: calm, 1: concerned, 2: angry, 3: mad")]
+	Material[] materials;
+
+	MadnessConsequencesTable csqTable;
 
 	void Awake () {
 		UpdateOrder ();
 		CheckActionValidity ();
 
-		timeLine = GameObject.FindWithTag ("Managers").GetComponent<TimeLine> ();
+		var managers = GameObject.FindWithTag ("Managers");
+		timeLine = managers.GetComponent<TimeLine> ();
+		slotRecord = managers.GetComponent<SlotRecord> ();
+		csqTable = managers.GetComponent<MadnessConsequencesTable> ();
 
 		if (path == null)
 			Debug.LogError (gameObject.name + " doesn't have a path");
+		if (itemHolder == null)
+			Debug.LogError (gameObject.name + " doesn't have an item holder");
+		if (materials.Length < 4)
+			Debug.LogWarning (gameObject.name + " doesn't have enough materials");
 
 		anim = GetComponent<Animator> ();
 	}
@@ -75,7 +78,7 @@ public class Character : MonoBehaviour {
 	}
 
 	void UpdateDay () {
-		anim.SetInteger ("MadnessStatus", (int)madnessStatus);
+		anim.SetInteger ("MadnessStatus", (int)madness);
 
 		float currentTime = timeLine.dayTimeProgress;
 
@@ -89,10 +92,10 @@ public class Character : MonoBehaviour {
 				MoveTowardCurrentAction (currentTime, currentAction, previousAction);
 
 				if (currentTime > currentAction.startTime)
-					StartAction (currentAction);
+					SetAction (currentAction, true);
 
 			} else if (currentTime > currentAction.endTime) {
-				EndAction (currentAction);
+				SetAction (currentAction, false);
 				++currentActionIndice;
 			}
 		}
@@ -156,34 +159,65 @@ public class Character : MonoBehaviour {
 		actions.Sort ((a, b) => a.startTime.CompareTo(b.startTime));
 	}
 
-	void StartAction (CharacterAction action) {
+	void SetAction (CharacterAction action, bool start) {
 		#if UNITY_EDITOR
-		print (gameObject.name + " starts to " + action.actionName);
+		if (start)
+			print (gameObject.name + " starts to " + action.actionName);
+		else
+			print (gameObject.name + " stops to " + action.actionName);
 		#endif
 
-		anim.SetBool ("Walking", false);
+		if (start)
+			anim.ResetTrigger ("Walk");
+		else
+			anim.SetTrigger ("Walk");
 
-		actionStarted = true;
-	}
+		if (action.takeItemInHolder && action.itemSlot != "None")
+			SetItemSlotHolded (action.itemSlot, start);
 
-	void EndAction (CharacterAction action) {
-		#if UNITY_EDITOR
-		print (gameObject.name + " stops to " + action.actionName);
-		#endif		
+		if (start && action.animPlayed != "None")
+			anim.SetTrigger (action.animPlayed);
 
-		anim.SetBool ("Walking", true);
+		if (!start) {
+			var slot = slotRecord.GetSlot (action.itemSlot);
+			if (slot != null) {
+				var item = slot.currentItem;
+				if (item != null)
+					GainMadness (csqTable.GetSwapMadnessAmount (action.itemSlot, item.itemName));
+			}
+		}
 
-		actionStarted = false;
+		actionStarted = start;
 	}
 
 	public MadnessLevel GetMadnessLevel () {
-		if (madnessStatus < .3f)
+		if (madness < .3f)
 			return MadnessLevel.Calm;
-		if (madnessStatus < .6f)
+		if (madness < .6f)
 			return MadnessLevel.Concerned;
-		if (madnessStatus < .9f)
+		if (madness < 1f)
 			return MadnessLevel.Angry;
 		return MadnessLevel.Mad;
+	}
+
+	void SetItemSlotHolded (string slotName, bool use) {
+		var slot = slotRecord.GetSlot (slotName);
+
+		if (use) {
+			var item = slot.currentItem;
+			item.transform.SetParent (itemHolder);
+			item.transform.localPosition = Vector3.zero;
+		} else
+			slot.RestoreItem ();
+	}
+
+	void GainMadness (float addedValue) {
+		var previousLevel = GetMadnessLevel ();
+		madness += addedValue;
+
+		var newLevel = GetMadnessLevel ();
+		if (previousLevel != newLevel)
+			GetComponentInChildren<MeshRenderer> ().material = materials[(int)newLevel];
 	}
 
 }

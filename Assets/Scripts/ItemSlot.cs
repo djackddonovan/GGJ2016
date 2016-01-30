@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ItemSlot : MonoBehaviour {
 
-	Item currentItem;
+	public Item currentItem { get; private set; }
 
 	[SerializeField]
 	string _slotName;
@@ -15,12 +15,6 @@ public class ItemSlot : MonoBehaviour {
 	void Awake () {
 		currentItem = GetComponentInChildren<Item> ();
 	}
-	
-	public string GetItemName () {
-		if (currentItem == null)
-			return "None";
-		return currentItem.itemName;
-	}
 
 	public void Swap (ItemSlot other) {
 		if (!CanSwap (other))
@@ -30,8 +24,14 @@ public class ItemSlot : MonoBehaviour {
 		other.currentItem = currentItem;
 		currentItem = swapper;
 
-		currentItem.transform.SetParent (transform, false);
-		other.currentItem.transform.SetParent (other.transform, false);
+		RestoreItem ();
+		other.RestoreItem ();
+	}
+
+	public void RestoreItem () {
+		currentItem.transform.SetParent (transform);
+		currentItem.transform.localPosition = Vector3.zero;
+		currentItem.transform.localRotation = Quaternion.identity;
 	}
 
 	public bool CanSwap (ItemSlot other) {

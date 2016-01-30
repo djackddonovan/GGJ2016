@@ -46,6 +46,8 @@ public class TimeLine : MonoBehaviour {
 	}
 
 	public void StartNight () {
+		++dayPassed;
+
 		dayTimeProgress = 0f;
 
 		onDayEnd.Invoke ();
@@ -53,9 +55,10 @@ public class TimeLine : MonoBehaviour {
 		onNightStart.Invoke ();
 	}
 
-	public void StartDay () {
-		++dayPassed;
-
+	public void StartDay (bool checkSwaps = false) {
+		if (checkSwaps && !GetComponent<ItemSwapper> ().TryStartDay ())
+			return;
+		
 		onNightEnd.Invoke ();
 		isDayTime = true;
 		onDayStart.Invoke ();

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
+using Object = UnityEngine.Object;
 
 public class SlotRecord : MonoBehaviour {
 
+	[Serializable]
 	class Entry {
 		public Entry(string _entryName, ItemSlot _slot) {
 			entryName = _entryName;
@@ -23,8 +26,11 @@ public class SlotRecord : MonoBehaviour {
 			record.Add (new Entry(slot.slotName, slot));
 	}
 
-	public string GetSlotItemName (string slotName) {
-		return record.Find (e => e.entryName == slotName).slot.GetItemName ();
+	public ItemSlot GetSlot (string slotName) {
+		var entry = record.Find (e => e.entryName == slotName);
+		if (entry == null)
+			return null;
+		return entry.slot;
 	}
 
 }
