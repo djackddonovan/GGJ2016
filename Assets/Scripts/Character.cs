@@ -22,6 +22,7 @@ public class Character : MonoBehaviour {
 		public string itemSlot = "None";
 		public bool takeItemInHolder = true;
 		public string animPlayed = "None";
+		public string soundPlayed = "None";
 	}
 
 	public RailPath path;
@@ -53,6 +54,11 @@ public class Character : MonoBehaviour {
 
 	MadnessConsequencesTable csqTable;
 
+	SoundManager soundMgr;
+	AudioSource[] soundSrc;
+	[SerializeField]
+	string[] soundsMadnessConsequences = new string[4] { "None", "None", "None", "None" };
+
 	void Awake () {
 		UpdateOrder ();
 		CheckActionValidity ();
@@ -61,6 +67,7 @@ public class Character : MonoBehaviour {
 		timeLine = managers.GetComponent<TimeLine> ();
 		slotRecord = managers.GetComponent<SlotRecord> ();
 		csqTable = managers.GetComponent<MadnessConsequencesTable> ();
+		soundMgr = managers.GetComponent<SoundManager> ();
 
 		if (path == null)
 			Debug.LogError (gameObject.name + " doesn't have a path");
@@ -68,8 +75,11 @@ public class Character : MonoBehaviour {
 			Debug.LogError (gameObject.name + " doesn't have an item holder");
 		if (materials.Length < 4)
 			Debug.LogWarning (gameObject.name + " doesn't have enough materials");
+		if (soundsMadnessConsequences.Length < 4)
+			Debug.LogWarning (gameObject.name + " doesn't have enough sounds");
 
 		anim = GetComponent<Animator> ();
+		soundSrc = GetComponents<AudioSource> ();
 	}
 
 	void Update () {
@@ -175,17 +185,23 @@ public class Character : MonoBehaviour {
 		if (action.takeItemInHolder && action.itemSlot != "None")
 			SetItemSlotHolded (action.itemSlot, start);
 
-		if (start && action.animPlayed != "None")
-			anim.SetTrigger (action.animPlayed);
+		Item item = null;
+		var slot = slotRecord.GetSlot (action.itemSlot);
+		if (slot != null)
+			item = slot.currentItem;
 
-		if (!start) {
-			var slot = slotRecord.GetSlot (action.itemSlot);
-			if (slot != null) {
-				var item = slot.currentItem;
-				if (item != null)
-					GainMadness (csqTable.GetSwapMadnessAmount (action.itemSlot, item.itemName));
-			}
+		if (start) {
+			if (action.animPlayed != "None")
+				anim.SetTrigger (action.animPlayed);
 		}
+
+		MadnessConsequencesTable.Severity severity = MadnessConsequencesTable.Severity.None;
+		if (!start && item != null) {
+			severity = csqTable.GetSwapSeverity (action.itemSlot, item.itemName);
+			GainMadness (csqTable.SeverityToMadnessAmount (severity));
+		}
+
+		PlayActionSound (action, start, item, severity);
 
 		actionStarted = start;
 	}
@@ -218,6 +234,21 @@ public class Character : MonoBehaviour {
 		var newLevel = GetMadnessLevel ();
 		if (previousLevel != newLevel)
 			GetComponentInChildren<MeshRenderer> ().material = materials[(int)newLevel];
+	}
+
+	void PlayActionSound (CharacterAction action, bool atStart, Item item, MadnessConsequencesTable.Severity madnessSeverity) {
+		if (atStart) {
+			if (item != null &&
+				item.OverrideSound (soundMgr, soundSrc [0], (action.endTime - action.startTime) / timeLine.speed))
+				return;
+
+			if (action.soundPlayed != "None")
+				soundMgr.PlaySoundForDurtation (soundSrc [0], action.soundPlayed, (action.endTime - action.startTime) / timeLine.speed);
+		} else {
+			string madsound = soundsMadnessConsequences[(int)madnessSeverity];
+			if (madsound != "None")
+				soundMgr.PlaySound (soundSrc [1], madsound);
+		}
 	}
 
 }
