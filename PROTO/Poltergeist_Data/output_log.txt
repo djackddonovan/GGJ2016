@@ -16,26 +16,20 @@ Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Ma
 Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.042 seconds
+- Completed reload, in  0.041 seconds
 Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\Documents\Unity Projects\GGJ2016\PROTO\Poltergeist_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 6.340487 ms
+UnloadTime: 632.080566 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 38b0 -> priority: 1 
-  Thread -> id: 38b4 -> priority: 1 
+  Thread -> id: 3e84 -> priority: 1 
+  Thread -> id: 18c0 -> priority: 1 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.105243 ms
+UnloadTime: 18.071455 ms
 
 Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 375.
-Total: 0.337059 ms (FindLiveObjects: 0.033254 ms CreateObjectMapping: 0.014779 ms MarkObjects: 0.281635 ms  DeleteObjects: 0.004105 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 37.728855 ms
-
-Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 312.
-Total: 0.984081 ms (FindLiveObjects: 0.053371 ms CreateObjectMapping: 0.044749 ms MarkObjects: 0.640453 ms  DeleteObjects: 0.243864 ms)
+Total: 0.812472 ms (FindLiveObjects: 0.081698 ms CreateObjectMapping: 0.051318 ms MarkObjects: 0.660570 ms  DeleteObjects: 0.012726 ms)
 
