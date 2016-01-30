@@ -13,7 +13,7 @@ public class ItemSwapper : MonoBehaviour {
 	ItemSlot initial = null;
 
 	public int maxSwapPerNight = 1;
-	Dictionary<string, string> swapsThisNight = new Dictionary<string, string> ();
+	List<KeyValuePair<string, string>> swapsThisNight = new List<KeyValuePair<string, string>> ();
 
 	[SerializeField]
 	RectTransform warningPanel;
@@ -21,6 +21,11 @@ public class ItemSwapper : MonoBehaviour {
 	Text swapCounter;
 
 	IEnumerator warningCoroutine = null;
+
+	[SerializeField]
+	Color hoverColor = Color.white;
+	[SerializeField]
+	Color selectedColor = Color.green;
 
 	void Awake () {
 		if (nightCam == null)
@@ -37,21 +42,37 @@ public class ItemSwapper : MonoBehaviour {
 		if (Input.GetButtonDown ("Swap")) {
 			if (hovered != null && swapsThisNight.Count >= maxSwapPerNight)
 				GiveWarning ("You have already used all of your swaps for this night.");
-			else
+			else {
+				if (initial != null)
+					initial.OnStopHover ();
 				initial = hovered;
+				if (initial != null)
+					initial.OnSelectInitial (selectedColor);
+			}
 		}
 
-		if (Input.GetButtonUp ("Swap") &&
-		    initial != null &&
-		    hovered != null &&
-			initial != hovered &&
-			initial.CanSwap (hovered)) {
-			if (HasSwapBeenDoneThisNight (initial, hovered))
-				GiveWarning ("You have already swapped those two items this night.");
-			else {
-				initial.Swap (hovered);
-				swapsThisNight.Add (initial.slotName, hovered.slotName);
-				swapCounter.text = "Swap done: " + swapsThisNight.Count + " / " + maxSwapPerNight;
+		if (Input.GetButtonUp ("Swap")) {
+			if (initial != null && hovered != null && initial != hovered) {
+
+				if (HasSwapBeenDoneThisNight (initial, hovered)) {
+					GiveWarning ("You have already swapped those two items this night.");
+					initial.OnStopHover ();
+				} else {
+					initial.Swap (hovered);
+					swapsThisNight.Add (new KeyValuePair<string, string> (initial.currentItem.name, hovered.currentItem.name));
+					swapCounter.text = "Swap done: " + swapsThisNight.Count + " / " + maxSwapPerNight;
+
+					hovered.OnHover (hoverColor);
+					initial.OnStopHover ();
+					initial = null;
+				}
+			} else if (initial != null) {
+				initial.OnStopHover ();
+				if (initial == GetHoveredSlot ()) {
+					hovered = initial;
+					hovered.OnHover (hoverColor);
+				}
+				initial = null;
 			}
 		}
 	}
@@ -60,11 +81,12 @@ public class ItemSwapper : MonoBehaviour {
 		var newHovered = GetHoveredSlot ();
 
 		if (newHovered != hovered) {
-			if (hovered != null)
+			if (hovered != null && hovered != initial)
 				hovered.OnStopHover ();
 
-			if (newHovered != null)
-				newHovered.OnHover ();
+			if (newHovered != null &&
+				(initial == null || initial.CanSwap (newHovered)))
+				newHovered.OnHover (hoverColor);
 
 			hovered = newHovered;
 		}
@@ -130,10 +152,10 @@ public class ItemSwapper : MonoBehaviour {
 	}
 
 	bool HasSwapBeenDoneThisNight (ItemSlot slot1, ItemSlot slot2) {
-		return swapsThisNight.ContainsKey (initial.slotName) &&
-			swapsThisNight [initial.slotName] == hovered.slotName ||
-			swapsThisNight.ContainsKey (hovered.slotName) &&
-			swapsThisNight [hovered.slotName] == initial.slotName;
+		string name1 = slot1.currentItem.name;
+		string name2 = slot2.currentItem.name;
+
+		return swapsThisNight.Exists (p => p.Key == name1 && p.Value == name2 || p.Key == name2 && p.Value == name1);
 	}
 
 	public void FinishNight () {

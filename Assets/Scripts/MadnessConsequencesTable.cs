@@ -69,7 +69,7 @@ public class MadnessConsequencesTable : MonoBehaviour {
 	}
 
 	string[][] namesInTables = new string[][] {
-		new string[] { "BeignoireVide", "BeignoirePleine", "Canape", "Lit", "MeubleVaisseille", "TableAManger" },
+		new string[] { "BeignoireVide", "BeignoirePleine", "Canape", "Lit", "MeubleVaisseille" },
 		new string[] { "PQ", "BrosseADent", "RougeALevre", "ArmeAFeu", "Cactus", "RailCoke", "Magazine", "Cigario", "TasseDeThe", "Banane", "Orange", "Reveil", "Pantoufle", "Livre", "Poele", "AssieteNouriture", "AssieteEponge", "Balai", "Mixer", "TV" },
 		new string[] { "WC", "Lavabo", "Fauteuil", "MeubleTV", "TableDeChevet", "EvierRobinet", "Gaziniere", "Chaises", "Chemine" },
 		new string[] { "ArmoireSdb", "Bibliotheque", "Armoire", "Frigo", "Placard" },
@@ -77,12 +77,11 @@ public class MadnessConsequencesTable : MonoBehaviour {
 	};
 
 	int[][] severityTables = new int[][] { //each row are the item values of one slot
-		new int[] { 0, 0, 1, 1, 1, 1,
-					0, 0, 1, 1, 1, 1,
-					2, 3, 0, 1, 2, 2,
-					1, 3, 1, 0, 2, 2,
-					1, 1, 1, 1, 0, 1,
-					2, 2, 2, 2, 2, 0 },
+		new int[] { 0, 0, 1, 1, 1,
+					0, 0, 1, 1, 1,
+					2, 3, 0, 1, 2,
+					1, 3, 1, 0, 2,
+					1, 1, 1, 1, 0 },
 		new int[] { 0, 2, 2, 3, 3, 2, 1, 2, 3, 2, 2, 1, 1, 1, 2, 2, 2, 2, 3, 2,
 			 	    1, 0, 2, 3, 3, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 3, 2,
 				    1, 1, 0, 3, 3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 3, 2, 

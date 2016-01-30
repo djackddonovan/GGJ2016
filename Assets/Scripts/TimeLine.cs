@@ -26,7 +26,9 @@ public class TimeLine : MonoBehaviour {
 	void Awake () {
 		isDayTime = true;
 		dayTimeProgress = 0f;
+	}
 
+	void Start () {
 		if (startWithDay)
 			StartDay ();
 		else

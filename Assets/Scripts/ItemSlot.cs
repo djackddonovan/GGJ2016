@@ -38,11 +38,22 @@ public class ItemSlot : MonoBehaviour {
 		return currentItem.category == other.currentItem.category;
 	}
 
-	public void OnHover () {
-
+	public void OnHover (Color color) {
+		SetOutlineColor (color);
 	}
 
 	public void OnStopHover () {
-
+		SetOutlineColor (Color.clear);
 	}
+
+	public void OnSelectInitial (Color color) {
+		SetOutlineColor (color);
+	}
+
+	void SetOutlineColor (Color color) {
+		var meshRdrs = GetComponentsInChildren<MeshRenderer> ();
+		if (meshRdrs.Length >= 2)
+			meshRdrs[1].material.SetColor ("_Color", color);
+	}
+
 }

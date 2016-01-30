@@ -209,7 +209,7 @@ public class Character : MonoBehaviour {
 	public MadnessLevel GetMadnessLevel () {
 		if (madness < .3f)
 			return MadnessLevel.Calm;
-		if (madness < .6f)
+		if (madness < .65f)
 			return MadnessLevel.Concerned;
 		if (madness < 1f)
 			return MadnessLevel.Angry;

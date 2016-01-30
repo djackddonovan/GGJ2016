@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour {
 	[SerializeField]
 	List<SoundEntry> soundArchive;
 
-	static float volume = 1f;
+	public static float volume = 1f;
 
 	Dictionary<AudioSource, PlayedSoundInfo> playingSources = new Dictionary<AudioSource, PlayedSoundInfo> ();
 
