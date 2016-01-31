@@ -70,8 +70,8 @@ public class MadnessConsequencesTable : MonoBehaviour {
 
 	string[][] namesInTables = new string[][] {
 		new string[] { "BeignoireVide", "BeignoirePleine", "Canape", "Lit", "MeubleVaisseille" },
-		new string[] { "PQ", "BrosseADent", "RougeALevre", "ArmeAFeu", "Cactus", "RailCoke", "Magazine", "Cigario", "TasseDeThe", "Banane", "Orange", "Reveil", "Pantoufle", "Livre", "Poele", "AssieteNouriture", "AssieteEponge", "Balai", "Mixer", "TV" },
-		new string[] { "WC", "Lavabo", "Fauteuil", "MeubleTV", "TableDeChevet", "EvierRobinet", "Gaziniere", "Chaises", "Chemine" },
+		new string[] { "PQ", "BrosseADent", "RougeALevre", "ArmeAFeu", "Cactus", "RailCoke", "Magazine", "Cigario", "TasseDeThe", "Banane", "Orange", "Reveil", "Pantoufle", "Livre", "Poele", "AssieteNouriture", "Assiete", "Balai", "Mixer", "TV" },
+		new string[] { "WC", "Lavabo", "Fauteuil", "MeubleTV", "TableDeChevet", "EvierRobinet", "Four", "Chaise", "Chemine" },
 		new string[] { "ArmoireSdb", "Bibliotheque", "Armoire", "Frigo", "Placard" },
 		new string[] { "TapisDouche", "Tapis" }
 	};

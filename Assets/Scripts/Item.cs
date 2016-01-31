@@ -24,6 +24,13 @@ public class Item : MonoBehaviour {
 	Category _category;
 	public Category category { get { return _category; } }
 
+	public Vector3 zeroPosition { get; private set; }
+	public Quaternion zeroRotation { get; private set; }
+
+	void Awake () {
+		zeroPosition = transform.localPosition;
+		zeroRotation = transform.localRotation;
+	}
 
 	public ItemSlot GetSlot () {
 		return GetComponentInParent<ItemSlot> ();

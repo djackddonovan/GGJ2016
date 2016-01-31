@@ -30,8 +30,8 @@ public class ItemSlot : MonoBehaviour {
 
 	public void RestoreItem () {
 		currentItem.transform.SetParent (transform);
-		currentItem.transform.localPosition = Vector3.zero;
-		currentItem.transform.localRotation = Quaternion.identity;
+		currentItem.transform.localPosition = currentItem.zeroPosition;
+		currentItem.transform.localRotation = currentItem.zeroRotation;
 	}
 
 	public bool CanSwap (ItemSlot other) {

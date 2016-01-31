@@ -27,13 +27,31 @@ public class ItemSwapper : MonoBehaviour {
 	[SerializeField]
 	Color selectedColor = Color.green;
 
+	[SerializeField]
+	string hoverSound = "SwapHover";
+	[SerializeField]
+	string initialSelectSound = "SwapSelect";
+	[SerializeField]
+	string failSound = "SwapFail";
+	[SerializeField]
+	string swapSound = "SwapDone";
+
+	SoundManager soundMgr;
+
+	[SerializeField]
+	AudioSource soundSrc;
+
 	void Awake () {
 		if (nightCam == null)
 			Debug.LogError ("Night cam not set on swapper");
 		if (warningPanel == null)
 			Debug.LogWarning ("WarningPanel not set on swapper");
 		if (swapCounter == null)
-			Debug.LogWarning ("SwapCounter not set on swapper");
+			Debug.LogWarning ("SwapCounter not set on swapper");;
+		if (soundSrc == null)
+			Debug.LogWarning ("AudioSource swapper");
+
+		soundMgr = GetComponent<SoundManager> ();
 	}
 
 	void Update () {
@@ -46,8 +64,10 @@ public class ItemSwapper : MonoBehaviour {
 				if (initial != null)
 					initial.OnStopHover ();
 				initial = hovered;
-				if (initial != null)
+				if (initial != null) {
 					initial.OnSelectInitial (selectedColor);
+					soundMgr.PlaySound (soundSrc, initialSelectSound);
+				}
 			}
 		}
 
@@ -57,6 +77,7 @@ public class ItemSwapper : MonoBehaviour {
 				if (HasSwapBeenDoneThisNight (initial, hovered)) {
 					GiveWarning ("You have already swapped those two items this night.");
 					initial.OnStopHover ();
+					soundMgr.PlaySound (soundSrc, failSound);
 				} else {
 					initial.Swap (hovered);
 					swapsThisNight.Add (new KeyValuePair<string, string> (initial.currentItem.name, hovered.currentItem.name));
@@ -65,6 +86,7 @@ public class ItemSwapper : MonoBehaviour {
 					hovered.OnHover (hoverColor);
 					initial.OnStopHover ();
 					initial = null;
+					soundMgr.PlaySound (soundSrc, swapSound);
 				}
 			} else if (initial != null) {
 				initial.OnStopHover ();
@@ -73,6 +95,7 @@ public class ItemSwapper : MonoBehaviour {
 					hovered.OnHover (hoverColor);
 				}
 				initial = null;
+				soundMgr.PlaySound (soundSrc, failSound);
 			}
 		}
 	}
@@ -85,8 +108,10 @@ public class ItemSwapper : MonoBehaviour {
 				hovered.OnStopHover ();
 
 			if (newHovered != null &&
-				(initial == null || initial.CanSwap (newHovered)))
+			    (initial == null || initial.CanSwap (newHovered))) {
 				newHovered.OnHover (hoverColor);
+				soundMgr.PlaySound (soundSrc, hoverSound);
+			}
 
 			hovered = newHovered;
 		}
