@@ -111,9 +111,8 @@ public class ItemSwapper : MonoBehaviour {
 			    (initial == null || initial.CanSwap (newHovered))) {
 				newHovered.OnHover (hoverColor);
 				soundMgr.PlaySound (soundSrc, hoverSound);
+				hovered = newHovered;
 			}
-
-			hovered = newHovered;
 		}
 	}
 
