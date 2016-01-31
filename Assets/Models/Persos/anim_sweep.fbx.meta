@@ -1,0 +1,266 @@
+fileFormatVersion: 2
+guid: b333e187d456ba54caae0c4779b1f480
+timeCreated: 1454243570
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: character_scene:head
+    100004: character_scene:head_grp
+    100006: character_scene:L_arm
+    100008: character_scene:L_arm_grp
+    100010: character_scene:L_foot
+    100012: character_scene:L_foot_grp
+    100014: character_scene:L_hand
+    100016: character_scene:L_hand_grp
+    100018: character_scene:L_leg1
+    100020: character_scene:L_leg1_grp
+    100022: character_scene:L_leg2
+    100024: character_scene:L_leg2_grp
+    100026: character_scene:L_shoulder
+    100028: character_scene:L_shoulder_grp
+    100030: character_scene:pelvis
+    100032: character_scene:R_arm
+    100034: character_scene:R_arm_grp
+    100036: character_scene:R_foot
+    100038: character_scene:R_foot_grp
+    100040: character_scene:R_hand
+    100042: character_scene:R_hand_grp
+    100044: character_scene:R_leg1
+    100046: character_scene:R_leg1_grp
+    100048: character_scene:R_leg2
+    100050: character_scene:R_leg2_grp
+    100052: character_scene:R_shoulder
+    100054: character_scene:R_shoulder_grp
+    100056: character_scene:torso
+    100058: character_scene:torso_grp
+    400000: //RootNode
+    400002: character_scene:head
+    400004: character_scene:head_grp
+    400006: character_scene:L_arm
+    400008: character_scene:L_arm_grp
+    400010: character_scene:L_foot
+    400012: character_scene:L_foot_grp
+    400014: character_scene:L_hand
+    400016: character_scene:L_hand_grp
+    400018: character_scene:L_leg1
+    400020: character_scene:L_leg1_grp
+    400022: character_scene:L_leg2
+    400024: character_scene:L_leg2_grp
+    400026: character_scene:L_shoulder
+    400028: character_scene:L_shoulder_grp
+    400030: character_scene:pelvis
+    400032: character_scene:R_arm
+    400034: character_scene:R_arm_grp
+    400036: character_scene:R_foot
+    400038: character_scene:R_foot_grp
+    400040: character_scene:R_hand
+    400042: character_scene:R_hand_grp
+    400044: character_scene:R_leg1
+    400046: character_scene:R_leg1_grp
+    400048: character_scene:R_leg2
+    400050: character_scene:R_leg2_grp
+    400052: character_scene:R_shoulder
+    400054: character_scene:R_shoulder_grp
+    400056: character_scene:torso
+    400058: character_scene:torso_grp
+    2300000: character_scene:head
+    2300002: character_scene:L_arm
+    2300004: character_scene:L_foot
+    2300006: character_scene:L_hand
+    2300008: character_scene:L_leg1
+    2300010: character_scene:L_leg2
+    2300012: character_scene:L_shoulder
+    2300014: character_scene:pelvis
+    2300016: character_scene:R_arm
+    2300018: character_scene:R_foot
+    2300020: character_scene:R_hand
+    2300022: character_scene:R_leg1
+    2300024: character_scene:R_leg2
+    2300026: character_scene:R_shoulder
+    2300028: character_scene:torso
+    3300000: character_scene:head
+    3300002: character_scene:L_arm
+    3300004: character_scene:L_foot
+    3300006: character_scene:L_hand
+    3300008: character_scene:L_leg1
+    3300010: character_scene:L_leg2
+    3300012: character_scene:L_shoulder
+    3300014: character_scene:pelvis
+    3300016: character_scene:R_arm
+    3300018: character_scene:R_foot
+    3300020: character_scene:R_hand
+    3300022: character_scene:R_leg1
+    3300024: character_scene:R_leg2
+    3300026: character_scene:R_shoulder
+    3300028: character_scene:torso
+    4300000: character_scene:pelvis
+    4300002: character_scene:torso
+    4300004: character_scene:head
+    4300006: character_scene:L_shoulder
+    4300008: character_scene:L_arm
+    4300010: character_scene:L_hand
+    4300012: character_scene:R_shoulder
+    4300014: character_scene:R_arm
+    4300016: character_scene:R_hand
+    4300018: character_scene:R_leg1
+    4300020: character_scene:R_leg2
+    4300022: character_scene:R_foot
+    4300024: character_scene:L_leg1
+    4300026: character_scene:L_leg2
+    4300028: character_scene:L_foot
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: character_scene:pelvis
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp/character_scene:L_leg1
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp/character_scene:L_leg1/character_scene:L_leg2_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp/character_scene:L_leg1/character_scene:L_leg2_grp/character_scene:L_leg2
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp/character_scene:L_leg1/character_scene:L_leg2_grp/character_scene:L_leg2/character_scene:L_foot_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:L_leg1_grp/character_scene:L_leg1/character_scene:L_leg2_grp/character_scene:L_leg2/character_scene:L_foot_grp/character_scene:L_foot
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp/character_scene:R_leg1
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp/character_scene:R_leg1/character_scene:R_leg2_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp/character_scene:R_leg1/character_scene:R_leg2_grp/character_scene:R_leg2
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp/character_scene:R_leg1/character_scene:R_leg2_grp/character_scene:R_leg2/character_scene:R_foot_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:R_leg1_grp/character_scene:R_leg1/character_scene:R_leg2_grp/character_scene:R_leg2/character_scene:R_foot_grp/character_scene:R_foot
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:head_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:head_grp/character_scene:head
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp/character_scene:L_shoulder
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp/character_scene:L_shoulder/character_scene:L_arm_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp/character_scene:L_shoulder/character_scene:L_arm_grp/character_scene:L_arm
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp/character_scene:L_shoulder/character_scene:L_arm_grp/character_scene:L_arm/character_scene:L_hand_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:L_shoulder_grp/character_scene:L_shoulder/character_scene:L_arm_grp/character_scene:L_arm/character_scene:L_hand_grp/character_scene:L_hand
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp/character_scene:R_shoulder
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp/character_scene:R_shoulder/character_scene:R_arm_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp/character_scene:R_shoulder/character_scene:R_arm_grp/character_scene:R_arm
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp/character_scene:R_shoulder/character_scene:R_arm_grp/character_scene:R_arm/character_scene:R_hand_grp
+        weight: 1
+      - path: character_scene:pelvis/character_scene:torso_grp/character_scene:torso/character_scene:R_shoulder_grp/character_scene:R_shoulder/character_scene:R_arm_grp/character_scene:R_arm/character_scene:R_hand_grp/character_scene:R_hand
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

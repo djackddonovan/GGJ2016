@@ -21,6 +21,7 @@ public class Character : MonoBehaviour {
 		public int node = 0;
 
 		public string itemSlot = "None";
+
 		public bool takeItemInHolder = true;
 		public string animPlayed = "None";
 		public string soundPlayed = "None";
@@ -227,7 +228,9 @@ public class Character : MonoBehaviour {
 			var item = slot == null ? null : slot.currentItem;
 			if (item != null) {
 				item.transform.SetParent (itemHolder);
-				item.transform.localPosition = Vector3.zero;
+				item.transform.localPosition = item.zeroPosition;
+				item.transform.localRotation = item.zeroRotation;
+
 			}
 		} else if(slot != null)
 			slot.RestoreItem ();
