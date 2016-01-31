@@ -104,8 +104,10 @@ public class ItemSwapper : MonoBehaviour {
 		var newHovered = GetHoveredSlot ();
 
 		if (newHovered != hovered) {
-			if (hovered != null && hovered != initial)
+			if (hovered != null && hovered != initial) {
 				hovered.OnStopHover ();
+				hovered = null;
+			}
 
 			if (newHovered != null &&
 			    (initial == null || initial.CanSwap (newHovered))) {

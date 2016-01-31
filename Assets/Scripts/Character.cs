@@ -16,7 +16,8 @@ public class Character : MonoBehaviour {
 		public string actionName = "";
 
 		public float startTime = 0f;
-		public float endTime = 1f;
+		[Tooltip("in seconds")]
+		public float animDuration = 4f;
 		public int node = 0;
 
 		public string itemSlot = "None";
@@ -59,10 +60,10 @@ public class Character : MonoBehaviour {
 	[SerializeField]
 	string[] soundsMadnessConsequences = new string[4] { "None", "None", "None", "None" };
 
-	void Awake () {
-		UpdateOrder ();
-		CheckActionValidity ();
+	[SerializeField]
+	MeshRenderer headRenderer;
 
+	void Awake () {
 		var managers = GameObject.FindWithTag ("Managers");
 		timeLine = managers.GetComponent<TimeLine> ();
 		slotRecord = managers.GetComponent<SlotRecord> ();
@@ -73,13 +74,18 @@ public class Character : MonoBehaviour {
 			Debug.LogError (gameObject.name + " doesn't have a path");
 		if (itemHolder == null)
 			Debug.LogError (gameObject.name + " doesn't have an item holder");
+		if (headRenderer == null)
+			Debug.LogError (gameObject.name + " doesn't have an head renderer");
 		if (materials.Length < 4)
 			Debug.LogWarning (gameObject.name + " doesn't have enough materials");
 		if (soundsMadnessConsequences.Length < 4)
 			Debug.LogWarning (gameObject.name + " doesn't have enough sounds");
 
-		anim = GetComponent<Animator> ();
+		anim = GetComponentInChildren<Animator> ();
 		soundSrc = GetComponents<AudioSource> ();
+
+		UpdateOrder ();
+		CheckActionValidity ();
 	}
 
 	void Update () {
@@ -104,7 +110,7 @@ public class Character : MonoBehaviour {
 				if (currentTime > currentAction.startTime)
 					SetAction (currentAction, true);
 
-			} else if (currentTime > currentAction.endTime) {
+			} else if (currentTime > GetActionEndTime (currentAction)) {
 				SetAction (currentAction, false);
 				++currentActionIndice;
 			}
@@ -113,21 +119,19 @@ public class Character : MonoBehaviour {
 
 	void MoveTowardCurrentAction (float currentTime, CharacterAction current, CharacterAction previous) {
 		if (current.node == 0) {
-			transform.position = path.GetPositionAfterIndice(previous == null ? 0 : previous.node,
-				Mathf.InverseLerp(previous == null ? 0f : previous.endTime, current.startTime, currentTime));
+			transform.position = path.GetPositionAfterIndice (previous == null ? 0 : previous.node,
+				Mathf.InverseLerp (previous == null ? 0f : GetActionEndTime (previous), current.startTime, currentTime));
 
 			return;
 		}
 
 		float moveStart = 0f;
 		if (previous != null)
-			moveStart = previous.endTime;
+			moveStart = GetActionEndTime(previous);
 
 		float moveEnd = current.startTime;
 
-		transform.position = path.GetPositionBetweenIndices(previous == null ? 0 : previous.node,
-															current.node,
-															Mathf.InverseLerp(moveStart, moveEnd, currentTime));
+		transform.position = path.GetPositionBetweenIndices(previous == null ? 0 : previous.node, current.node, Mathf.InverseLerp(moveStart, moveEnd, currentTime));
 	}
 
 	public void StartDayRoutine () {
@@ -146,19 +150,19 @@ public class Character : MonoBehaviour {
 			var action = actions [i];
 
 			if (i != 0 &&
-				action.startTime < previousAction.endTime) {
+				action.startTime < GetActionEndTime(previousAction)) {
 				Debug.LogError (previousAction.actionName + " go past " + action.actionName + " starting time");
 				return;
 			}
 
-			if (action.endTime > 1f) {
+			if (GetActionEndTime(action) > 1f) {
 				Debug.LogError (action.actionName + " go past the end of day");
 				return;
 			}
 
 			if (action.startTime <= 0f)
 				Debug.LogWarning (action.actionName + " start before start of day");
-			if (action.endTime - action.startTime <= 0f)
+			if (GetActionEndTime(action) - action.startTime <= 0f)
 				Debug.LogWarning (action.actionName + " doesn't have a proper duration");
 
 			previousAction = action;
@@ -220,10 +224,12 @@ public class Character : MonoBehaviour {
 		var slot = slotRecord.GetSlot (slotName);
 
 		if (use) {
-			var item = slot.currentItem;
-			item.transform.SetParent (itemHolder);
-			item.transform.localPosition = Vector3.zero;
-		} else
+			var item = slot == null ? null : slot.currentItem;
+			if (item != null) {
+				item.transform.SetParent (itemHolder);
+				item.transform.localPosition = Vector3.zero;
+			}
+		} else if(slot != null)
 			slot.RestoreItem ();
 	}
 
@@ -233,22 +239,25 @@ public class Character : MonoBehaviour {
 
 		var newLevel = GetMadnessLevel ();
 		if (previousLevel != newLevel)
-			GetComponentInChildren<MeshRenderer> ().material = materials[(int)newLevel];
+			headRenderer.material = materials [(int)newLevel];
 	}
 
 	void PlayActionSound (CharacterAction action, bool atStart, Item item, MadnessConsequencesTable.Severity madnessSeverity) {
 		if (atStart) {
-			if (item != null &&
-				item.OverrideSound (soundMgr, soundSrc [0], (action.endTime - action.startTime) / timeLine.speed))
+			if (item != null && item.OverrideSound (soundMgr, soundSrc [0], action.animDuration))
 				return;
 
 			if (action.soundPlayed != "None")
-				soundMgr.PlaySoundForDurtation (soundSrc [0], action.soundPlayed, (action.endTime - action.startTime) / timeLine.speed);
+				soundMgr.PlaySoundForDurtation (soundSrc [0], action.soundPlayed, action.animDuration);
 		} else {
 			string madsound = soundsMadnessConsequences[(int)madnessSeverity];
 			if (madsound != "None")
 				soundMgr.PlaySound (soundSrc [1], madsound);
 		}
+	}
+
+	float GetActionEndTime (CharacterAction action) {
+		return action.startTime + action.animDuration * timeLine.speed;
 	}
 
 }

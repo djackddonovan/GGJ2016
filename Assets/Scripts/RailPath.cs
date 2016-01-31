@@ -10,6 +10,8 @@ public class RailPath : MonoBehaviour {
 	public float totalLength { get; private set; }
 
 	#if UNITY_EDITOR
+	public Color gizmoColor = Color.red;
+
 	[InspectorButton("UpdateNodes")]
 	public bool updateNodes;
 	#endif
@@ -23,9 +25,6 @@ public class RailPath : MonoBehaviour {
 			fragmentLengths.Add(Vector3.Distance (nodes [i].position, nodes [i + 1].position));
 			totalLength += fragmentLengths [i];
 		}
-
-		fragmentLengths.Add(Vector3.Distance (nodes [nodes.Count - 1].position, nodes [0].position));
-		totalLength += fragmentLengths [nodes.Count - 1];
 	}
 
 	public Vector3 GetPositionOnPath (float distance) {
@@ -37,12 +36,7 @@ public class RailPath : MonoBehaviour {
 
 			if (distance < fragmentLength) {
 				Vector3 lastNode = nodes[fragmentIndex].position;
-				Vector3 nextNode;
-
-				if (fragmentIndex < nodes.Count - 1)
-					nextNode = nodes [fragmentIndex + 1].position;
-				else
-					nextNode = nodes [0].position;
+				Vector3 nextNode = nodes [fragmentIndex + 1].position;
 
 				return Vector3.MoveTowards (lastNode, nextNode, distance);
 			}
@@ -65,7 +59,7 @@ public class RailPath : MonoBehaviour {
 			Debug.LogWarning ("Get Position Between Indices where: to > nodes.Count");
 			return Vector3.zero;
 		}
-
+			
 		interpolation = Mathf.Clamp01 (interpolation);
 
 		float distance = 0f;
@@ -76,27 +70,25 @@ public class RailPath : MonoBehaviour {
 
 		int currentindex = from;
 		while (true) {
-			float fragmentLength = fragmentLengths [currentindex < nodes.Count ? currentindex : 0];
+			float fragmentLength = fragmentLengths [currentindex];
 
 			if (distance > fragmentLength) {
 				distance -= fragmentLength;
 				++currentindex;
 			} else {
 				Vector3 lastNode = nodes[currentindex].position;
-				Vector3 nextNode;
-
-				if (currentindex < nodes.Count - 1)
-					nextNode = nodes [currentindex + 1].position;
-				else
-					nextNode = nodes [0].position;
+				Vector3 nextNode = nodes [currentindex + 1].position;
 
 				return Vector3.MoveTowards (lastNode, nextNode, distance);
 			}
+
+			if (currentindex >= nodes.Count - 1)
+				return nodes [nodes.Count - 1].position;
 		}
 	}
 
 	public Vector3 GetPositionAfterIndice (int from, float interpolation) {
-		return GetPositionBetweenIndices(from, nodes.Count, interpolation);
+		return GetPositionBetweenIndices(from, nodes.Count - 1, interpolation);
 	}
 
 	public Vector3 GetStart () {
@@ -105,10 +97,9 @@ public class RailPath : MonoBehaviour {
 
 	#if UNITY_EDITOR
 	void OnDrawGizmos() {
-		Gizmos.color = Color.red;
+		Gizmos.color = gizmoColor;
 		for (int i = 0; i < nodes.Count - 1; ++i)
-			Gizmos.DrawLine (nodes [i].position, nodes [i + 1].position);
-		Gizmos.DrawLine (nodes [nodes.Count - 1].position, nodes [0].position);
+			Gizmos.DrawLine (nodes [i].position + Vector3.up, nodes [i + 1].position + Vector3.up);
 	}
 	#endif
 
